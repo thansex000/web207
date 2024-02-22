@@ -3,7 +3,7 @@ app.controller('accountCtrl', function ($scope, $rootScope, $firebaseArray) {
     var studentsRef = firebase.database().ref('students');
     // Tạo một $firebaseArray để theo dõi và cập nhật dữ liệu
     $rootScope.students = $firebaseArray(studentsRef);
-    $scope.account = function () {  
+    $scope.account = function () {
         // Lấy dữ liệu từ các biến initial
         var updatedStudent = {
             $id: $rootScope.student.$id,
@@ -12,7 +12,7 @@ app.controller('accountCtrl', function ($scope, $rootScope, $firebaseArray) {
             email: $scope.initialEmail,
             schoolfee: $scope.initialSchoolfee,
             gender: $scope.initialGender,
-            marks : $scope.initialmarks,
+            marks: $scope.initialmarks,
             birthday: $scope.initialBirthday
         };
 
@@ -33,27 +33,75 @@ app.controller('accountCtrl', function ($scope, $rootScope, $firebaseArray) {
             Swal.fire({
                 icon: 'success',
                 title: 'Cập Nhật thành công!',
-              
                 showConfirmButton: false,
                 closeOnClickOutside: false,
                 allowOutsideClick: false,
                 timer: 1600
             });
-            
+
         }).catch(function (error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Cập Nhật Thất Bại!',
-               
                 showConfirmButton: false,
                 closeOnClickOutside: false,
                 allowOutsideClick: false,
                 timer: 1600
             });
-           
+
         });
         console.log($rootScope.student);
-       
+
     };
-    
+
+
+
+
+
+
+
+    $scope.pass = function () {
+        var repass = {
+            username: $scope.initialUsername,
+            email: $scope.initialEmail,
+            password: null
+        };
+
+        angular.forEach($rootScope.students, function (student) {
+            if (student.username === repass.username || student.email === repass.email) {
+                repass.password = student.password; // Gán mật khẩu từ sinh viên tìm thấy
+                return; // Thoát khỏi vòng lặp nếu tìm thấy trùng khớp
+            }
+        });
+
+        if (repass.password !== null) {
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Mật khẩu của bạn là: ' + repass.password,
+                showConfirmButton: false,
+                closeOnClickOutside: false,
+                allowOutsideClick: false,
+                timer: 1600
+            });
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Username hoặc email không tồn tại',
+                showConfirmButton: false,
+                closeOnClickOutside: false,
+                allowOutsideClick: false,
+                timer: 1600
+            });
+
+
+
+
+        }
+    };
+
+
+
+
 });

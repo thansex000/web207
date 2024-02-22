@@ -14,7 +14,7 @@ app.run(function ($rootScope, $http, $firebaseArray,$location) {
         messagingSenderId: "745123299741",
         appId: "1:745123299741:web:2196432e15b2f22438af74",
         measurementId: "G-6WNR84SZTY"
-    };
+      };
     firebase.initializeApp(firebaseConfig);
 
     // Lấy tham chiếu đến "students" trong Realtime Database
@@ -72,6 +72,20 @@ app.run(function ($rootScope, $http, $firebaseArray,$location) {
     }
 
 
+    $rootScope.pass = function () { 
+        sessionStorage.removeItem('rememberedUserID');
+        Swal.fire({
+            icon: 'success',
+            title: 'Đăng Xuất thành công!',
+            text: 'Quay lại trang chủ!',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            timer: 1600
+        });
+
+        window.location.href = "#!index";
+    }
+
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         if (!$rootScope.student) {
           console.log("chưa đăng nhập");
@@ -125,6 +139,7 @@ app.config(function ($routeProvider) {
         })
         .when('/forgotpass', {
             templateUrl: 'layout/forgotpass.html',
+            controller: 'accountCtrl'
 
         })
         .when('/inforaccoutn', {
