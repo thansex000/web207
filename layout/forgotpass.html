@@ -13,26 +13,39 @@
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-user fa-lg fa-fw"></i></span>
-                                            <input type="text" id="usernameInput" class="form-control" ng-model="initialUsername" />
-                                            <label class="form-label visually-hidden" for="usernameInput">Username</label>
+                                            <span class="input-group-text"><i
+                                                    class="fas fa-user fa-lg fa-fw"></i></span>
+                                            <input type="text" id="usernameInput" class="form-control"
+                                                ng-model="initialUsername" />
+                                            <label class="form-label visually-hidden"
+                                                for="usernameInput">Username</label>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-envelope fa-lg fa-fw"></i></span>
-                                            <input type="email" id="emailInput" class="form-control" ng-model="initialEmail" />
+                                            <span class="input-group-text"><i
+                                                    class="fas fa-envelope fa-lg fa-fw"></i></span>
+                                            <input type="email" id="emailInput" class="form-control"
+                                                ng-model="initialEmail" />
                                             <label class="form-label visually-hidden" for="emailInput">Email</label>
                                         </div>
                                     </div>
-                                    
 
-
-                                    
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="button" class="btn btn-primary btn-lg" ng-click="pass()">Lấy lại mật khẩu</button>
+                                    <div class="otpverify mb-3" id="otpverify">
+                                        <input type="text" id="otp_inp" placeholder="Nhập mã">
+                                        <button ng-click="sendOTP()"> Gửi Otp</button>
                                     </div>
+
+
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg" ng-click="pass()">Lấy lại
+                                            mật khẩu</button>
+                                    </div>
+
+
+
                                     <p class="text-center">bạn đã có tài khoản?<a class="text-primary"
                                             href="#!login">Đăng Nhập Ngay</a></p>
 
