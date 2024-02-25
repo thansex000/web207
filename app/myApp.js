@@ -162,6 +162,11 @@ app.config(function ($routeProvider) {
             controller: 'startexamCtrl'
 
         })
+        .when('/historyexam', {
+            templateUrl: 'layout/historyexam.html',
+            controller: 'historyexamCtrl'
+
+        })
 
 
 

@@ -4,6 +4,11 @@ app.controller('registerCtrl', function ($scope, $rootScope, $firebaseArray) {
     // Tạo một $firebaseArray để theo dõi và cập nhật dữ liệu
     $rootScope.students = $firebaseArray(studentsRef);
 
+    // $rootScope.students = $firebaseArray(firebase.database().ref('students'));
+    // có thể dùng cách này để thay thế, khó hơn
+
+
+
     $scope.register = function() {
         // Kiểm tra xem studentR.username đã tồn tại trong cơ sở dữ liệu hay không
         studentsRef.orderByChild("username").equalTo($scope.studentR.username).once("value")

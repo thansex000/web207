@@ -34,12 +34,12 @@ app.controller('startexamCtrl', function ($scope, $rootScope, $firebaseArray, $r
             $scope.indexQ = 0
         }
     }
-    
+
 
 
     $scope.prev = function () {
         $scope.indexQ--
-        if ($scope.indexQ < 0 ) {
+        if ($scope.indexQ < 0) {
             $scope.indexQ = 0
         }
     }
@@ -55,7 +55,7 @@ app.controller('startexamCtrl', function ($scope, $rootScope, $firebaseArray, $r
             confirmButtonText: "Đúng, Tôi Muốn Kết Thúc"
         }).then((result) => {
             if (result.isConfirmed) {
-                $scope.timer=0
+                $scope.timer = 0
             }
 
         });
@@ -67,9 +67,9 @@ app.controller('startexamCtrl', function ($scope, $rootScope, $firebaseArray, $r
         if ($scope.timer > 0) {// nếu thời gian >0 thì giảm xuống
             $scope.timer -= 1;
         } else if ($scope.timer == 0) { //nếu thời gian ==0 thì kết thúc và lưu kết quả
-            //tìm đối tượng sinh viên theo id
-            console.log($scope.traloi)
-            $scope.traloi.forEach((tl, i) => {//104278
+
+            // console.log($scope.traloi)
+            $scope.traloi.forEach((tl, i) => {
                 $scope.questions.forEach((da, j) => {
                     if (i == j && tl.Answer == da.AnswerId) {
                         $scope.testMark += da.Marks;
@@ -77,12 +77,25 @@ app.controller('startexamCtrl', function ($scope, $rootScope, $firebaseArray, $r
 
                 });
             });
-            var studentToUpdate = $rootScope.students.$getRecord($rootScope.student.$id);
-            studentToUpdate.marks = parseInt(studentToUpdate.marks) + parseInt($scope.testMark);
-            $rootScope.students.$save(studentToUpdate)
+            var studenthistory = $rootScope.students.$getRecord($rootScope.student.$id); //tìm sinh viên dựa theo id trong students
+
+            if (!angular.isObject(studenthistory.history)) {
+                studenthistory.history = []
+            }
+
+            var historyS = {
+                // Các thuộc tính khác của lịch sử bài thi
+                Name: $scope.subject.Name,
+                poin: $scope.testMark,
+                testDateTime: new Date().toLocaleString('vi-VN'),
+            };
+            studenthistory.history.push(historyS);
+
+            studenthistory.marks = parseInt(studenthistory.marks) + parseInt($scope.testMark);
+            $rootScope.students.$save(studenthistory)
             Swal.fire({
                 icon: 'success',
-                title: 'Điểm của bạn là '+ $scope.testMark,  
+                title: 'Điểm của bạn là ' + $scope.testMark,
                 showConfirmButton: false,
                 closeOnClickOutside: false,
                 allowOutsideClick: false,
