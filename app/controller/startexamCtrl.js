@@ -68,7 +68,7 @@ app.controller('startexamCtrl', function ($scope, $rootScope, $firebaseArray, $r
             $scope.timer -= 1;
         } else if ($scope.timer == 0) { //nếu thời gian ==0 thì kết thúc và lưu kết quả
 
-            // console.log($scope.traloi)
+            console.log($scope.traloi)
             $scope.traloi.forEach((tl, i) => {
                 $scope.questions.forEach((da, j) => {
                     if (i == j && tl.Answer == da.AnswerId) {

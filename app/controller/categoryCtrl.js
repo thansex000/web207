@@ -1,6 +1,6 @@
 app.controller('categoryCtrl', function ($scope, $rootScope, $firebaseArray) {
     $scope.cout = 0;//
-    $scope.pageCount = Math.ceil($rootScope.subjects.length / 6);//4
+    $scope.pageCount = Math.ceil($rootScope.subjects.length / 6);
 
     $scope.prev = function() {
         if ($scope.cout > 0) {
